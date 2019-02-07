@@ -1,0 +1,1 @@
+export const START_STOP_PRESSED = 'START_STOP_PRESSED'

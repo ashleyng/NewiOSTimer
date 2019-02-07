@@ -5,17 +5,29 @@ import {
   TouchableHighlight,
   StyleSheet,
 } from 'react-native'
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 
-class Button extends React.Component {
+
+interface IProps {
+  startStopPressed: () => { }
+  isRunning: boolean
+}
+
+interface IState {
+  startStopButton: boolean
+}
+class Button extends React.Component<IProps, IState> {
   render() {
+    let {isRunning} = this.props
     return (
       <View style={styles.buttonWrapper}>
         <TouchableHighlight style={[styles.button, styles.reset]}>
           <Text style={{color: 'white'}}>Reset</Text>
         </TouchableHighlight>
 
-        <TouchableHighlight style={[styles.button, styles.start]}>
-          <Text style={{color: '#4ddb41'}}>Start</Text>
+        <TouchableHighlight style={[styles.button, isRunning ? styles.stop : styles.start]} onPress={() => this.props.startStopPressed()}>
+          <Text style={{color: isRunning ? '#e20f0f' : '#4ddb41'}}>{ isRunning ? 'Stop' : 'Start' }</Text>
         </TouchableHighlight>
       </View>
     );
@@ -42,9 +54,18 @@ const styles = StyleSheet.create({
   start: {
     backgroundColor: '#235e1e'
   },
+  stop: {
+    backgroundColor: '#590909'
+  },
   reset: {
     backgroundColor: '#676867'
   }
 });
 
-export default Button;
+const mapStateToProps = (state: IState) => {
+  return {
+    isRunning: state.startStopButton
+  }
+}
+
+export default connect(mapStateToProps, actions)(Button);

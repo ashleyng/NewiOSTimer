@@ -1,14 +1,18 @@
 import React from 'react';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import { StyleSheet, Text, View } from 'react-native';
 import Header from './components/Header';
 import Timer from './components/Timer';
 import Button from './components/Button';
 import Laps from './components/Laps';
+import reducers from './reducers';
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
+      <Provider store={createStore(reducers)}>
+        <View style={styles.container}>
         <View style={styles.top}>
           <Header />
           <Timer />
@@ -19,6 +23,8 @@ export default class App extends React.Component {
           <Laps/>
         </View>
       </View>
+      </Provider>
+      
     );
   }
 }
