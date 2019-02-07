@@ -24,8 +24,9 @@ const styles = StyleSheet.create({
   },
   timer: {
     fontSize: 80,
-    fontWeight: '100',
+    fontWeight: '200',
     alignSelf: 'center',
+    color: 'white'
   }
 });
 

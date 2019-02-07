@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Header from './components/Header';
 import Timer from './components/Timer';
+import Button from './components/Button';
 
 export default class App extends React.Component {
   render() {
@@ -13,7 +14,7 @@ export default class App extends React.Component {
         </View>
 
         <View style={styles.bottom}>
-          <Text>PlaceHolder</Text>
+        <Button/>
         </View>
       </View>
     );
@@ -23,6 +24,7 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#0c0c0c'
   },
   top: {
     flex: 1.5

@@ -18,13 +18,15 @@ class Header extends React.Component {
 const styles = StyleSheet.create({
   header: {
     borderBottomWidth: 0.5,
-    paddingTop: 20,
+    paddingTop: 30,
     paddingBottom: 10,
-    backgroundColor: '#F9F9F9'
+    backgroundColor: '#212121',
+    borderColor: '#565656'
   },
   title: {
     alignSelf: 'center',
     fontWeight: '600',
+    color: 'white'
   },
 });
 
