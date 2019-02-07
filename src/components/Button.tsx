@@ -25,9 +25,11 @@ class Button extends React.Component {
 const styles = StyleSheet.create({
   buttonWrapper: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     paddingBottom: 15,
     paddingTop: 30,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
   button: {
     height: 80,
