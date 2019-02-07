@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   lapData: {
     fontSize: 16,
     color: 'white'
-  }
+  },
 });
 
 export default Laps;

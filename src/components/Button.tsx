@@ -10,12 +10,12 @@ import * as actions from '../actions';
 
 
 interface IProps {
-  startStopPressed: () => { }
+  startStopPressed: (arg0: Date) => { }
   isRunning: boolean
 }
 
 interface IState {
-  startStopButton: boolean
+  startStopButton: { isRunning: boolean }
 }
 class Button extends React.Component<IProps, IState> {
   render() {
@@ -26,7 +26,7 @@ class Button extends React.Component<IProps, IState> {
           <Text style={{color: 'white'}}>Reset</Text>
         </TouchableHighlight>
 
-        <TouchableHighlight style={[styles.button, isRunning ? styles.stop : styles.start]} onPress={() => this.props.startStopPressed()}>
+        <TouchableHighlight style={[styles.button, isRunning ? styles.stop : styles.start]} onPress={() => this.props.startStopPressed(new Date())}>
           <Text style={{color: isRunning ? '#e20f0f' : '#4ddb41'}}>{ isRunning ? 'Stop' : 'Start' }</Text>
         </TouchableHighlight>
       </View>
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state: IState) => {
   return {
-    isRunning: state.startStopButton
+    isRunning: state.startStopButton.isRunning
   }
 }
 
