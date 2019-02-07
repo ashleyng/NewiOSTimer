@@ -1,8 +1,22 @@
 import * as actionTypes from './ActionTypes';
 
-export const startStopPressed = (timeTapped: Date) => {
+export const startPressed = (payload: Date) => {
+  // console.log(payload)
   return {
-    type: actionTypes.START_STOP_PRESSED,
-    payload: timeTapped
+    type: actionTypes.START_PRESSED,
+    payload: payload
+  }
+}
+
+export const stopPressed = () => {
+  return {
+    type: actionTypes.STOP_PRESSED
+  }
+}
+
+export const timerInterval = (payload: Date) => {
+  return {
+    type: actionTypes.TIMER_INTERVAL,
+    payload: payload
   }
 }

@@ -10,14 +10,32 @@ import * as actions from '../actions';
 
 
 interface IProps {
-  startStopPressed: (arg0: Date) => { }
+  startPressed: (arg0: Date) => { }
+  stopPressed: () => { }
+  timerInterval: (arg0: Date) => { }
   isRunning: boolean
 }
 
 interface IState {
-  startStopButton: { isRunning: boolean }
+  startStopButton: { isRunning: boolean, startTime: Date }
 }
 class Button extends React.Component<IProps, IState> {
+  private runningInterval: number
+
+  startStopPressed() {
+    if (this.props.isRunning) {
+      clearInterval(this.runningInterval)
+      this.props.stopPressed()
+    } else {
+      this.props.startPressed(new Date())
+      this.runningInterval = setInterval(() => {
+        this.props.timerInterval(new Date())
+      }, 30)
+
+      
+    }
+  }
+
   render() {
     let {isRunning} = this.props
     return (
@@ -26,7 +44,7 @@ class Button extends React.Component<IProps, IState> {
           <Text style={{color: 'white'}}>Reset</Text>
         </TouchableHighlight>
 
-        <TouchableHighlight style={[styles.button, isRunning ? styles.stop : styles.start]} onPress={() => this.props.startStopPressed(new Date())}>
+        <TouchableHighlight style={[styles.button, isRunning ? styles.stop : styles.start]} onPress={this.startStopPressed.bind(this)}>
           <Text style={{color: isRunning ? '#e20f0f' : '#4ddb41'}}>{ isRunning ? 'Stop' : 'Start' }</Text>
         </TouchableHighlight>
       </View>

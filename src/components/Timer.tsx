@@ -5,12 +5,29 @@ import {
   StyleSheet,
 } from 'react-native';
 import TimeFormatter from 'minutes-seconds-milliseconds';
+import { connect } from 'react-redux';
+import * as actions from '../actions';
 
-class Timer extends React.Component {
+interface IProps {
+  isRunning: boolean
+  startTime: Date,
+  timer: number
+  timerInterval: (arg0: Date) => { }
+}
+interface IState {
+  startStopButton: { isRunning: boolean, startTime: Date, timer: number }
+  // timer: number
+}
+class Timer extends React.Component<IProps, IState> {
+  private runningInterval: number
+  constructor(props: IProps) {
+    super(props)
+  }
+
   render() {
     return (
       <View style={styles.timeWrapper}>
-        <Text style={styles.timer}>00:00.29</Text>
+        <Text style={styles.timer}>{this.props.timer}</Text>
       </View>
     );
   }
@@ -30,4 +47,13 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Timer;
+const mapStateToProps = (state: IState) => {
+  // console.log(state.startStopButton.timer)
+  return {
+    isRunning: state.startStopButton.isRunning,
+    startTime: state.startStopButton.startTime,
+    timer: state.startStopButton.timer
+  }
+}
+
+export default connect(mapStateToProps, actions)(Timer);
