@@ -28,6 +28,7 @@ class Button extends React.Component<IProps, IState> {
       this.props.stopPressed()
     } else {
       this.props.startPressed(new Date())
+      
       this.runningInterval = setInterval(() => {
         this.props.timerInterval(new Date())
       }, 30)

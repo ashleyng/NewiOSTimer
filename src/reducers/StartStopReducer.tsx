@@ -5,19 +5,18 @@ import TimeFormatter from 'minutes-seconds-milliseconds'
 const INITIAL_STATE = {
   isRunning: false,
   startTime: null,
-  timer: 0
+  timer: 0,
+  offset: 0
 };
 
 export default (state = INITIAL_STATE, action: {type: String, payload: Date}) => {
-  // console.log(action.payload)
   switch(action.type) {
     case actionTypes.START_PRESSED:
-      return {...state, isRunning: !state.isRunning, startTime: action.payload }
+      return {...state, isRunning: !state.isRunning, startTime: action.payload, offset: state.timer }
     case actionTypes.STOP_PRESSED:
       return {...state, isRunning: !state.isRunning}
     case actionTypes.TIMER_INTERVAL:
-      let timer = TimeFormatter(action.payload - state.startTime + state.timer)
-      console.log(timer)
+      let timer: number = action.payload - state.startTime + state.offset
       return {...state, timer}
     default: 
       return state

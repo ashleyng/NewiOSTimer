@@ -27,7 +27,7 @@ class Timer extends React.Component<IProps, IState> {
   render() {
     return (
       <View style={styles.timeWrapper}>
-        <Text style={styles.timer}>{this.props.timer}</Text>
+        <Text style={styles.timer}>{TimeFormatter(this.props.timer)}</Text>
       </View>
     );
   }
