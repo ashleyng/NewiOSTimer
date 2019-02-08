@@ -13,7 +13,8 @@ interface IProps {
   startPressed: (arg0: Date) => { }
   stopPressed: () => { }
   timerInterval: (arg0: Date) => { }
-  resetPressed:() => { }
+  resetPressed: () => { }
+  lapPressed: () => { }
   isRunning: boolean
 }
 
@@ -37,7 +38,11 @@ class Button extends React.Component<IProps, IState> {
   }
 
   resetLapPressed() {
-    this.props.resetPressed()
+    if (this.props.isRunning) {
+      this.props.lapPressed()
+    } else {
+      this.props.resetPressed()
+    }
   }
 
   render() {
@@ -45,7 +50,7 @@ class Button extends React.Component<IProps, IState> {
     return (
       <View style={styles.buttonWrapper}>
         <TouchableHighlight style={[styles.button, styles.reset]} onPress={this.resetLapPressed.bind(this)}>
-          <Text style={{color: 'white'}}>Reset</Text>
+          <Text style={{color: 'white'}}>{ isRunning ? 'Lap' : 'Reset' }</Text>
         </TouchableHighlight>
 
         <TouchableHighlight style={[styles.button, isRunning ? styles.stop : styles.start]} onPress={this.startStopPressed.bind(this)}>

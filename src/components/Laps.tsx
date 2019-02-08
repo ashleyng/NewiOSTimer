@@ -4,27 +4,26 @@ import {
   ListView,
   Text,
   StyleSheet,
+  ListViewDataSource,
 } from 'react-native';
+import { connect } from 'react-redux';
 
-var laps = [
-  { name: 'Lap 1', value: '00:00.01'},
-  { name: 'Lap 2', value: '00:00.02'},
-  { name: 'Lap 3', value: '00:00.03'},
-  { name: 'Lap 4', value: '00:00.04'},
-  { name: 'Lap 5', value: '00:00.05'}
-]
+
 let ds = new ListView.DataSource({
   rowHasChanged: (row1, row2) => row1 !== row2
 })
-class Laps extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      dataSource: ds.cloneWithRows(laps)
-    }
-  }
 
-  _renderRow(rowData) {
+interface IProps {
+  dataSource: ListViewDataSource
+}
+
+interface IState {
+  startStopButton: { laps: { [id: string]: { name: string, value: number }}}
+}
+class Laps extends React.Component<IProps> {
+
+  _renderRow(rowData: { name: string, value: number }) {
+    console.log(rowData)
     return (
       <View style={styles.lapRow}>
         <Text style={styles.lapData}>{rowData.name}</Text>
@@ -38,7 +37,7 @@ class Laps extends React.Component {
       <View style={{flex: 1}}>
         <ListView
           enableEmptySections={true}
-          dataSource={this.state.dataSource}
+          dataSource={this.props.dataSource}
           renderRow={this._renderRow.bind(this)}/>
       </View>
     );
@@ -62,4 +61,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Laps;
+const mapStateToProps = (state: IState) => {
+  // console.log(state)
+  let { laps } = state.startStopButton
+  return {
+    dataSource: ds.cloneWithRows(laps)
+  }
+}
+
+export default connect(mapStateToProps, null)(Laps);

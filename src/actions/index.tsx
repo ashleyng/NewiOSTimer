@@ -26,3 +26,9 @@ export const resetPressed = () => {
     type: actionTypes.RESET_PRESSED
   }
 }
+
+export const lapPressed = () => {
+  return {
+    type: actionTypes.LAP_PRESSED
+  }
+}
