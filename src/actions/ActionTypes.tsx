@@ -1,3 +1,4 @@
 export const START_PRESSED = 'START_PRESSED'
 export const STOP_PRESSED = 'STOP_PRESSED'
+export const RESET_PRESSED = 'RESET_PRESSED'
 export const TIMER_INTERVAL = 'TIMER_INTERVAL'

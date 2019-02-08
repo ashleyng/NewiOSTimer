@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
-import StartStopReducer from './StartStopReducer';
+import Reducer from './Reducer';
 
 export default combineReducers({
-  startStopButton: StartStopReducer,
+  startStopButton: Reducer,
 });

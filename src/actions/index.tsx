@@ -20,3 +20,9 @@ export const timerInterval = (payload: Date) => {
     payload: payload
   }
 }
+
+export const resetPressed = () => {
+  return {
+    type: actionTypes.RESET_PRESSED
+  }
+}
